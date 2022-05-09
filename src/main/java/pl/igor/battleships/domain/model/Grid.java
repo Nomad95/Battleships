@@ -34,7 +34,8 @@ class Grid {
         HashMap<String, Tile> grid = new HashMap<>(size * size);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                String tileNumber = String.format("%s%s", numberToLetter(i), j + 1);
+                String tileNumber = String.format("%s%s", AsciiCommons.I.arrayIndexToLetter(i), j + 1);
+                System.out.println(tileNumber);
                 grid.put(tileNumber, new Tile(tileNumber));
             }
         }
@@ -42,20 +43,17 @@ class Grid {
         return grid;
     }
 
-    private char numberToLetter(int i) {
-        return (char) (i + 'A' - 1);
-    }
-
     List<Tile> getTilesInProximity(String tileNumber) {
         Tile tile = getTile(tileNumber);
-        Set<String> adjacentTiles = Set.of(tile.getTopLeft(),
-        tile.getTop(),
-        tile.getTopRight(),
-        tile.getRight(),
-        tile.getLeft(),
-        tile.getBottomLeft(),
-        tile.getBottomRight(),
-        tile.getBottom());
+        Set<String> adjacentTiles = Set.of(
+                tile.getTileNumberAtTopLeft(),
+                tile.getTileNumberAtTop(),
+                tile.getTileNumberAtTopRight(),
+                tile.getTileNumberAtRight(),
+                tile.getTileNumberAtLeft(),
+                tile.getTileNumberAtBottomLeft(),
+                tile.getTileNumberAtBottomRight(),
+                tile.getTileNumberAtBottom());
 
         return adjacentTiles.stream()
                 .filter(this::tileExists)
@@ -75,3 +73,4 @@ class Grid {
         return tiles.get(tileNumber);
     }
 }
+

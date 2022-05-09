@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 class GameServiceTest extends Specification {
 
-    public static final int TEST_BOARD_DIMENSION = 2
+    private static final int TEST_BOARD_DIMENSION = 2
     GameService gameService
     PlayerService playerService
 
@@ -41,8 +41,14 @@ class GameServiceTest extends Specification {
             def player = aHumanPlayer("Player1")
         when:
             def board = gameService.createBoard(player.id, TEST_BOARD_DIMENSION)
+
+            board.grid.getTile("A1")
+            board.grid.getTile("A2")
+            board.grid.getTile("B1")
+            board.grid.getTile("B2")
+
         then:
-            board.grid.//TODO:
+            notThrown(IllegalArgumentException)
     }
 
     def "board should not be in game just after creation"() {
