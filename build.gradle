@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id "io.freefair.lombok" version "6.4.3"
+    //id 'io.freefair.lombok' version '3.8.4'
+}
+
+group 'pl.igor'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //lombok
+//    compileOnly 'org.projectlombok:lombok:1.18.24'
+//    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+//
+//    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+//    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    //spock
+    implementation 'org.codehaus.groovy:groovy-all:2.5.8'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-3.0'
+    testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.0-groovy-3.0'
+
+
+    //commons
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'com.google.guava:guava:30.1.1-jre'
+}
+
+test {
+    useJUnitPlatform()
+}
