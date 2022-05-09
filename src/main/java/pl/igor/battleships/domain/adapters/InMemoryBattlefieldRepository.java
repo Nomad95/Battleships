@@ -13,7 +13,8 @@ public class InMemoryBattlefieldRepository implements BattlefieldRepository {
 
     @Override
     public Battlefield save(Battlefield battlefield) {
-        return battlefields.put(battlefield.getGameId(), battlefield);
+        battlefields.put(battlefield.getGameId(), battlefield);
+        return battlefield;
     }
 
     @Override

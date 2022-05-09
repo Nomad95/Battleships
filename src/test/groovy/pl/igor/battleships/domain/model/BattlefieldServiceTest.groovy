@@ -2,6 +2,7 @@ package pl.igor.battleships.domain.model
 
 import pl.igor.battleships.application.game_configuration.PlaceableShip
 import pl.igor.battleships.application.game_configuration.StandardBattleshipsConfiguration
+import pl.igor.battleships.domain.adapters.InMemoryBattlefieldRepository
 import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository
 import pl.igor.battleships.presentation.PlayerDto
 import spock.lang.Specification
@@ -15,7 +16,7 @@ class BattlefieldServiceTest extends Specification {
     def setup() {
         def playerRepository = new InMemoryPlayerRepository()
         playerService = new PlayerService(new PlayerCreator(), playerRepository)
-        gameService = new BattlefieldService(playerService, new BattlefieldCreator())
+        gameService = new BattlefieldService(playerService, new BattlefieldCreator(), new InMemoryBattlefieldRepository())
     }
 
     def "should create a board for player"() {
