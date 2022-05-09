@@ -3,6 +3,7 @@ package pl.igor.battleships.domain.model;
 import lombok.RequiredArgsConstructor;
 import pl.igor.battleships.application.game_configuration.BattleshipsConfiguration;
 import pl.igor.battleships.application.game_configuration.PlaceableShip;
+import pl.igor.battleships.domain.outbound_ports.BattlefieldRepository;
 import pl.igor.battleships.presentation.BattlefieldDto;
 import pl.igor.battleships.presentation.PlayerDto;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 public final class BattlefieldService {
     private final PlayerService playerService;
     private final BattlefieldCreator battlefieldCreator;
+    private final BattlefieldRepository battlefieldRepository;
 
     Board createBoard(UUID playerId, int dimension) {
         Player player = playerService.fetchPlayer(playerId);
@@ -34,6 +36,8 @@ public final class BattlefieldService {
         placeShips(playerTwoBoard, battleshipsConfiguration.getShipsToPlace(), shipPlacementStrategy);
 
         Battlefield battlefield = new Battlefield(playerOne, playerOneBoard, playerTwo, playerTwoBoard);
+
+        battlefield = battlefieldRepository.save(battlefield);
 
         return BattlefieldDto.builder()
                 .gameId(battlefield.getGameId())

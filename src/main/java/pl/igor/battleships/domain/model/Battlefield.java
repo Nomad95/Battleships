@@ -1,11 +1,10 @@
 package pl.igor.battleships.domain.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.util.UUID;
 
-@Getter(value = AccessLevel.PACKAGE)
+@Getter
 public class Battlefield {
     private final UUID gameId;
     private final Player playerOne;

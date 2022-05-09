@@ -2,6 +2,7 @@ package pl.igor.battleships;
 
 import pl.igor.battleships.application.BattleshipsFacade;
 import pl.igor.battleships.application.game_configuration.StandardBattleshipsConfiguration;
+import pl.igor.battleships.domain.adapters.InMemoryBattlefieldRepository;
 import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository;
 import pl.igor.battleships.domain.model.BattlefieldCreator;
 import pl.igor.battleships.domain.model.BattlefieldService;
@@ -17,7 +18,7 @@ public class BattleshipGame {
         InMemoryPlayerRepository playerRepository = new InMemoryPlayerRepository();
         PlayerCreator playerCreator = new PlayerCreator();
         PlayerService players = new PlayerService(playerCreator, playerRepository);
-        BattlefieldService battlefieldService = new BattlefieldService(players, new BattlefieldCreator());
+        BattlefieldService battlefieldService = new BattlefieldService(players, new BattlefieldCreator(), new InMemoryBattlefieldRepository());
         BattleshipsFacade battleships = new BattleshipsFacade(players, battlefieldService);
 
         //create players and a game
