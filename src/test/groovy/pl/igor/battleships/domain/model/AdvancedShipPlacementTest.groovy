@@ -78,7 +78,7 @@ class AdvancedShipPlacementTest extends Specification {
         return true
     }
 
-    def "algorithm should tell if it cant place given tiles because of lack of size"() {
+    def "algorithm should tell if it cant place given tiles because of lack of size"() {//TODO
         given:
             def player = aHumanPlayer("Player1")
         when:

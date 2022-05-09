@@ -1,6 +1,7 @@
 package pl.igor.battleships.domain.model
 
 import pl.igor.battleships.application.game_configuration.PlaceableShip
+import pl.igor.battleships.application.game_configuration.StandardBattleshipsConfiguration
 import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository
 import pl.igor.battleships.presentation.PlayerDto
 import spock.lang.Specification
@@ -80,6 +81,17 @@ class BattlefieldServiceTest extends Specification {
             board = gameService.placeShips(board, shipsToPlace, new AdvancedShipPlacementStrategy())
         then:
             board.ready
+    }
+
+    def "should create battlefield with two boards for each player"() {
+        given:
+            def player1 = aHumanPlayer("Player1")
+            def player2 = aHumanPlayer("Player1")
+        when:
+            def game = gameService.createNewGame(player1, player2, new StandardBattleshipsConfiguration())
+        then:
+            game.player1.id == player1.id
+            game.player2.id == player2.id
     }
 
 
