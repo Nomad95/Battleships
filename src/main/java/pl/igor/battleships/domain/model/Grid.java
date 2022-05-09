@@ -3,6 +3,7 @@ package pl.igor.battleships.domain.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
+import pl.igor.battleships.application.AsciiCommons;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +28,10 @@ class Grid {
         }
 
         this.size = size;
-        tiles = createGridOfSize(size);
+        tiles = initializeGridOfSize(size);
     }
 
-    private Map<String, Tile> createGridOfSize(int size) {
+    private Map<String, Tile> initializeGridOfSize(int size) {
         HashMap<String, Tile> grid = new HashMap<>(size * size);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -43,7 +44,7 @@ class Grid {
         return grid;
     }
 
-    List<Tile> getTilesInProximity(String tileNumber) {
+    List<Tile> getTilesInProximity(@NonNull String tileNumber) {
         Tile tile = getTile(tileNumber);
         Set<String> adjacentTiles = Set.of(
                 tile.getTileNumberAtTopLeft(),
@@ -61,7 +62,7 @@ class Grid {
                 .collect(Collectors.toList());
     }
 
-    boolean tileExists(String tileNumber) {
+    boolean tileExists(@NonNull String tileNumber) {
         return tiles.containsKey(tileNumber);
     }
 

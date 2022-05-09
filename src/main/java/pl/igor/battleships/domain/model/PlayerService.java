@@ -2,7 +2,6 @@ package pl.igor.battleships.domain.model;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import pl.igor.battleships.application.Players;
 import pl.igor.battleships.domain.outbound_ports.PlayerRepository;
 import pl.igor.battleships.presentation.PlayerDto;
 import pl.igor.battleships.presentation.PlayerType;
@@ -10,7 +9,7 @@ import pl.igor.battleships.presentation.PlayerType;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public final class PlayerService implements Players {
+public final class PlayerService {
 
     private final PlayerCreator playerCreator;
     private final PlayerRepository playerRepository;

@@ -8,7 +8,7 @@ import spock.lang.Specification
 class AdvancedShipPlacementTest extends Specification {
 
     public static final int TEST_BOARD_DIMENSION = 2
-    GameService gameService
+    BattlefieldService gameService
     PlayerService playerService
     BattlefieldCreator battlefieldCreator
 
@@ -17,7 +17,7 @@ class AdvancedShipPlacementTest extends Specification {
         playerService = new PlayerService(new PlayerCreator(), playerRepository)
 
         battlefieldCreator = new BattlefieldCreator()
-        gameService = new GameService(playerService, battlefieldCreator)
+        gameService = new BattlefieldService(playerService, battlefieldCreator)
     }
 
     def "should place ships apart from each other of at least one tile"() {

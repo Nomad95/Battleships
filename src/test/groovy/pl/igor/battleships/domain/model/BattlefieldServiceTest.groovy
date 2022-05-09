@@ -5,16 +5,16 @@ import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository
 import pl.igor.battleships.presentation.PlayerDto
 import spock.lang.Specification
 
-class GameServiceTest extends Specification {
+class BattlefieldServiceTest extends Specification {
 
     private static final int TEST_BOARD_DIMENSION = 2
-    GameService gameService
+    BattlefieldService gameService
     PlayerService playerService
 
     def setup() {
         def playerRepository = new InMemoryPlayerRepository()
         playerService = new PlayerService(new PlayerCreator(), playerRepository)
-        gameService = new GameService(playerService, new BattlefieldCreator())
+        gameService = new BattlefieldService(playerService, new BattlefieldCreator())
     }
 
     def "should create a board for player"() {

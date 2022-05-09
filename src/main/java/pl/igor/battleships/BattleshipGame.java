@@ -4,7 +4,7 @@ import pl.igor.battleships.application.BattleshipsFacade;
 import pl.igor.battleships.application.game_configuration.StandardBattleshipsConfiguration;
 import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository;
 import pl.igor.battleships.domain.model.BattlefieldCreator;
-import pl.igor.battleships.domain.model.GameService;
+import pl.igor.battleships.domain.model.BattlefieldService;
 import pl.igor.battleships.domain.model.PlayerCreator;
 import pl.igor.battleships.domain.model.PlayerService;
 import pl.igor.battleships.presentation.BattlefieldDto;
@@ -17,8 +17,8 @@ public class BattleshipGame {
         InMemoryPlayerRepository playerRepository = new InMemoryPlayerRepository();
         PlayerCreator playerCreator = new PlayerCreator();
         PlayerService players = new PlayerService(playerCreator, playerRepository);
-        GameService gameService = new GameService(players, new BattlefieldCreator());
-        BattleshipsFacade battleships = new BattleshipsFacade(players, gameService);
+        BattlefieldService battlefieldService = new BattlefieldService(players, new BattlefieldCreator());
+        BattleshipsFacade battleships = new BattleshipsFacade(players, battlefieldService);
 
         //create players and a game
         PlayerDto lukasz = battleships.createHumanPlayer("Łukasz");

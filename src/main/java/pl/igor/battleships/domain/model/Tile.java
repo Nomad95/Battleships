@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
+import pl.igor.battleships.application.AsciiCommons;
 
 @Getter(value = AccessLevel.PACKAGE)
 @RequiredArgsConstructor

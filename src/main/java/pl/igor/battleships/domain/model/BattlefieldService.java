@@ -1,7 +1,6 @@
 package pl.igor.battleships.domain.model;
 
 import lombok.RequiredArgsConstructor;
-import pl.igor.battleships.application.Game;
 import pl.igor.battleships.application.game_configuration.BattleshipsConfiguration;
 import pl.igor.battleships.application.game_configuration.PlaceableShip;
 import pl.igor.battleships.presentation.BattlefieldDto;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public final class GameService implements Game {
+public final class BattlefieldService {
     private final PlayerService playerService;
     private final BattlefieldCreator battlefieldCreator;
 
@@ -21,7 +20,6 @@ public final class GameService implements Game {
         return battlefieldCreator.createBoard(player, dimension);
     }
 
-    @Override
     public BattlefieldDto createNewGame(PlayerDto player1, PlayerDto player2, BattleshipsConfiguration battleshipsConfiguration) {
         ShipPlacementStrategy shipPlacementStrategy = ShipPlacementFactory.I.getStrategyWithName(battleshipsConfiguration.getPlacementAlgorithmName());
 

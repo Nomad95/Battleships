@@ -1,4 +1,4 @@
-package pl.igor.battleships.domain.model;
+package pl.igor.battleships.application;
 
 public enum AsciiCommons {
     I;
