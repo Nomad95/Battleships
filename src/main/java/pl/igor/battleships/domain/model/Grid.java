@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import pl.igor.battleships.application.AsciiCommons;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class Grid {
@@ -72,6 +69,17 @@ class Grid {
         }
 
         return tiles.get(tileNumber);
+    }
+
+    List<String> getSortedTilesNumbers() {
+        List<String> strings = new ArrayList<>(tiles.keySet());
+        Collections.sort(strings);
+        return strings;
+    }
+
+    void setTileAsShip(String tileNumber) {
+        Tile tile = getTile(tileNumber);
+        tile.setAsShip();
     }
 }
 

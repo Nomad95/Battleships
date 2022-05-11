@@ -1,5 +1,7 @@
 package pl.igor.battleships.application.game_configuration;
 
+import pl.igor.battleships.domain.model.ShipPlacementStrategy;
+
 import java.util.List;
 
 public interface BattleshipsConfiguration {
@@ -8,5 +10,5 @@ public interface BattleshipsConfiguration {
 
     List<PlaceableShip> getShipsToPlace();
 
-    String getPlacementAlgorithmName();
+    ShipPlacementStrategy getShipPlacementStrategy();
 }

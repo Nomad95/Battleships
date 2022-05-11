@@ -25,7 +25,7 @@ public final class BattlefieldService {
     //todo maybe try to do it with one service?
 
     public BattlefieldDto createNewGame(PlayerDto player1, PlayerDto player2, BattleshipsConfiguration battleshipsConfiguration) {
-        ShipPlacementStrategy shipPlacementStrategy = ShipPlacementFactory.I.getStrategyWithName(battleshipsConfiguration.getPlacementAlgorithmName());
+        ShipPlacementStrategy shipPlacementStrategy = battleshipsConfiguration.getShipPlacementStrategy();
 
         Player playerOne = playerService.fetchPlayer(player1.getId());
         Board playerOneBoard = createBoard(player1.getId(), battleshipsConfiguration.getGridSize());

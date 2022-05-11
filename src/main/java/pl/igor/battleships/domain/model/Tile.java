@@ -9,7 +9,7 @@ import pl.igor.battleships.application.AsciiCommons;
 @Getter(value = AccessLevel.PACKAGE)
 @RequiredArgsConstructor
 class Tile {
-    private TileState tileState;
+    private TileState tileState = TileState.WATER;
     private final String tileNumber;
 
     String getTileNumberAtTopLeft() {
@@ -69,6 +69,10 @@ class Tile {
         return new TableCoordinates(
                 AsciiCommons.I.letterToArrayIndex(chars[0]),
                 (chars[1] - '0'));
+    }
+
+    public void setAsShip() {
+        tileState = TileState.SHIP;
     }
 
     /**

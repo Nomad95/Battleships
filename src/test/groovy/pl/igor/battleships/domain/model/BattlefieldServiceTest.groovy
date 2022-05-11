@@ -4,6 +4,7 @@ import pl.igor.battleships.application.game_configuration.PlaceableShip
 import pl.igor.battleships.application.game_configuration.StandardBattleshipsConfiguration
 import pl.igor.battleships.domain.adapters.InMemoryBattlefieldRepository
 import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository
+import pl.igor.battleships.presentation.BattlefieldDto
 import pl.igor.battleships.presentation.PlayerDto
 import spock.lang.Specification
 
@@ -95,6 +96,9 @@ class BattlefieldServiceTest extends Specification {
             game.player2.id == player2.id
     }
 
+    def "enemy ship should be hit if player have guessed its position"() {
+
+    }
 
     private List<PlaceableShip> twoShipsWith3And4Tiles() {
         List.of(new PlaceableShip(4), new PlaceableShip(3))
@@ -109,5 +113,12 @@ class BattlefieldServiceTest extends Specification {
         playerService.createNewPlayer(name)
     }
 
+    private BattlefieldDto aTestBattlefieldWithAllTilesAsShip() {
+        def player1 = aHumanPlayer("Player1")
+        def player2 = aHumanPlayer("Player1")
+        def game = gameService.createNewGame(player1, player2, new StandardBattleshipsConfiguration())
+
+        return null
+    }
 
 }

@@ -30,6 +30,7 @@ public class BattleshipGame {
         BattlefieldDto battleshipsGame = battleships.createGame(lukasz, r2D2, config);
 
 
+
         //create players
         //generate battleships
         //let the play begin

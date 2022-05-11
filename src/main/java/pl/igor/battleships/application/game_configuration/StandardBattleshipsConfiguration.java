@@ -2,6 +2,8 @@ package pl.igor.battleships.application.game_configuration;
 
 
 import com.google.common.collect.Lists;
+import pl.igor.battleships.domain.model.AdvancedShipPlacementStrategy;
+import pl.igor.battleships.domain.model.ShipPlacementStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 public class StandardBattleshipsConfiguration implements BattleshipsConfiguration {
     List<ShipConfig> shipConfigs = List.of(new ShipConfig("Destroyer", 4,2), new ShipConfig("Battleship", 5,1));
     int boardSize = 10;
-    String shipPlacementAlgorithm = "ADVANCED";
+    ShipPlacementStrategy shipPlacementAlgorithm = new AdvancedShipPlacementStrategy();
 
     @Override
     public int getGridSize() {
@@ -30,7 +32,7 @@ public class StandardBattleshipsConfiguration implements BattleshipsConfiguratio
     }
 
     @Override
-    public String getPlacementAlgorithmName() {
+    public ShipPlacementStrategy getShipPlacementStrategy() {
         return shipPlacementAlgorithm;
     }
 

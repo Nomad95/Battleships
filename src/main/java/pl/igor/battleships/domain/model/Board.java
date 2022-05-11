@@ -15,10 +15,10 @@ class Board {
     private boolean ready = false;
     private boolean unsunkenShips = true;
     private boolean inOngoingGame = false;
-    private List<Ship> playerShips;
+    private List<Ship> playerShips;//TODO: maybe change board to just grid?
 
     void populateWithShips(List<PlaceableShip> placeableShips, ShipPlacementStrategy shipPlacementStrategy) {
-        placeableShips
+        placeableShips //grid.setShips(stratrgy?)
                 .forEach(placeableShip -> shipPlacementStrategy.placeShipOfTiles(grid, placeableShip.getShipSize()));
         setReady();
     }
