@@ -2,7 +2,7 @@ package pl.igor.battleships.domain.adapters;
 
 import lombok.NonNull;
 import pl.igor.battleships.domain.model.Player;
-import pl.igor.battleships.domain.outbound_ports.PlayerRepository;
+import pl.igor.battleships.domain.ports.PlayerRepository;
 
 import java.util.HashMap;
 import java.util.Map;

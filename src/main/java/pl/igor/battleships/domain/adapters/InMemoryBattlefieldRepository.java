@@ -1,7 +1,7 @@
 package pl.igor.battleships.domain.adapters;
 
 import pl.igor.battleships.domain.model.Battlefield;
-import pl.igor.battleships.domain.outbound_ports.BattlefieldRepository;
+import pl.igor.battleships.domain.ports.BattlefieldRepository;
 
 import java.util.HashMap;
 import java.util.Map;

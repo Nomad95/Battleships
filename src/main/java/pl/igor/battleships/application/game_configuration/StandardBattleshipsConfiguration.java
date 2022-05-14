@@ -1,11 +1,8 @@
 package pl.igor.battleships.application.game_configuration;
 
 
-import com.google.common.collect.Lists;
 import pl.igor.battleships.domain.model.AdvancedShipPlacementStrategy;
-import pl.igor.battleships.domain.model.ShipPlacementStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StandardBattleshipsConfiguration implements BattleshipsConfiguration {
@@ -18,22 +15,22 @@ public class StandardBattleshipsConfiguration implements BattleshipsConfiguratio
         return boardSize;
     }
 
-    @Override
-    public List<PlaceableShip> getShipsToPlace() {
-        ArrayList<PlaceableShip> placeableShips = Lists.newArrayList();
-        for (ShipConfig shipConfig : shipConfigs) {
-            int numberOfShips = shipConfig.getNumberOfShips();
-            for (int i = 0; i < numberOfShips; i++) {
-                placeableShips.add(new PlaceableShip(shipConfig.getShipSize()));
-            }
-        }
+//    @Override
+//    public List<PlaceableShip> getShipsToPlace() {
+//        ArrayList<PlaceableShip> placeableShips = Lists.newArrayList();
+//        for (ShipConfig shipConfig : shipConfigs) {
+//            int numberOfShips = shipConfig.getNumberOfShips();
+//            for (int i = 0; i < numberOfShips; i++) {
+//                placeableShips.add(new PlaceableShip(shipConfig.getShipSize()));
+//            }
+//        }
+//
+//        return placeableShips;
+//    }
 
-        return placeableShips;
-    }
-
     @Override
-    public ShipPlacementStrategy getShipPlacementStrategy() {
-        return shipPlacementAlgorithm;
+    public List<PlaceableShip2> newShipsPlacementMapping() {
+        return shipPlacementAlgorithm.getShips(boardSize, shipConfigs);
     }
 
 }

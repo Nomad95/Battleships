@@ -2,9 +2,9 @@ package pl.igor.battleships.application;
 
 import lombok.RequiredArgsConstructor;
 import pl.igor.battleships.application.game_configuration.BattleshipsConfiguration;
-import pl.igor.battleships.domain.model.BattlefieldService;
-import pl.igor.battleships.domain.model.PlayerService;
 import pl.igor.battleships.domain.model.RandomFireComputerDifficulty;
+import pl.igor.battleships.domain.ports.BattleshipsService;
+import pl.igor.battleships.domain.ports.PlayerService;
 import pl.igor.battleships.presentation.BattlefieldDto;
 import pl.igor.battleships.presentation.Difficulty;
 import pl.igor.battleships.presentation.PlayerDto;
@@ -13,7 +13,7 @@ import pl.igor.battleships.presentation.PlayerDto;
 public class BattleshipsFacade {
 
     private final PlayerService playersService;
-    private final BattlefieldService battlefieldService;
+    private final BattleshipsService battlefieldService;
 
     public PlayerDto createHumanPlayer(String name) {
         return playersService.createNewPlayer(name);

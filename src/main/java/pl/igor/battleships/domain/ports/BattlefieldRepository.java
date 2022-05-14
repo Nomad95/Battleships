@@ -1,4 +1,4 @@
-package pl.igor.battleships.domain.outbound_ports;
+package pl.igor.battleships.domain.ports;
 
 import pl.igor.battleships.domain.model.Battlefield;
 

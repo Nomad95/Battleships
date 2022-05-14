@@ -1,10 +1,10 @@
 package pl.igor.battleships.domain.model;
 
-class ComputerPlayer extends Player {
+public class ComputerPlayer extends Player {
 
     private final ComputerDifficulty computerDifficulty;
 
-    ComputerPlayer(String name, ComputerDifficulty computerDifficulty) {
+    public ComputerPlayer(String name, ComputerDifficulty computerDifficulty) {
         super(name);
         this.computerDifficulty = computerDifficulty;
     }

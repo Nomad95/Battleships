@@ -1,4 +1,7 @@
-package pl.igor.battleships.domain.model;
+package pl.igor.battleships.domain;
+
+import pl.igor.battleships.application.game_configuration.ShipPlacementStrategy;
+import pl.igor.battleships.domain.model.AdvancedShipPlacementStrategy;
 
 public enum ShipPlacementFactory {
     I;

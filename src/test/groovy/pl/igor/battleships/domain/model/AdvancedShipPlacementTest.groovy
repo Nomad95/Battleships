@@ -1,24 +1,21 @@
 package pl.igor.battleships.domain.model
 
 import pl.igor.battleships.application.game_configuration.PlaceableShip
-import pl.igor.battleships.domain.adapters.InMemoryBattlefieldRepository
 import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository
+import pl.igor.battleships.domain.ports.PlayerService
 import pl.igor.battleships.presentation.PlayerDto
-import spock.lang.Specification
 
-class AdvancedShipPlacementTest extends Specification {
+class AdvancedShipPlacementTest {
 
     public static final int TEST_BOARD_DIMENSION = 2
     BattlefieldService gameService
     PlayerService playerService
-    BattlefieldCreator battlefieldCreator
 
     def setup() {
         def playerRepository = new InMemoryPlayerRepository()
-        playerService = new PlayerService(new PlayerCreator(), playerRepository)
-
-        battlefieldCreator = new BattlefieldCreator()
-        gameService = new BattlefieldService(playerService, battlefieldCreator, new InMemoryBattlefieldRepository())
+//        playerService = new PlayerService(new PlayerCreator(), playerRepository)
+//
+//        gameService = new BattlefieldService(playerService, battlefieldCreator, new InMemoryBattlefieldRepository())
     }
 
     def "should place ships apart from each other of at least one tile"() {

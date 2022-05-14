@@ -7,16 +7,12 @@ import java.util.UUID;
 @Getter
 public class Battlefield {
     private final UUID gameId;
-    private final Player playerOne;
     private final Board playerOneBoard;
-    private final Player playerTwo;
     private final Board playerTwoBoard;
 
-    public Battlefield(Player playerOne, Board playerOneBoard, Player playerTwo, Board playerTwoBoard) {
-        this.playerOne = playerOne;
-        this.playerOneBoard = playerOneBoard;
-        this.playerTwo = playerTwo;
-        this.playerTwoBoard = playerTwoBoard;
+    public Battlefield(Board playerOneBoard, Board playerTwoBoard) {
         this.gameId = UUID.randomUUID();
+        this.playerOneBoard = playerOneBoard;
+        this.playerTwoBoard = playerTwoBoard;
     }
 }
