@@ -82,7 +82,7 @@ public class Board {
         readyToPlay = true;
     }
 
-    public ShootResult performShootAt(@NonNull String tileNumber) {
+    ShootResult performShootAt(@NonNull String tileNumber) {
         Optional<Tile> tileOptional = getTile(tileNumber);
         if (tileOptional.isEmpty()) {
             return ShootResult.WRONG_TILE;

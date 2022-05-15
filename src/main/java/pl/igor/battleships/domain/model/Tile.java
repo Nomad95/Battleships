@@ -10,21 +10,9 @@ class Tile {
     private final String tileNumber;
     private Ship partOfShip;
 
-    public Tile(String tileNumber) {
+    Tile(String tileNumber) {
         this.tileNumber = tileNumber;
         this.partOfShip = null;
-    }
-
-    public void setAsShip() {
-        tileState = TileState.SHIP;
-    }
-
-    private void setAsHitWater() {
-        tileState = TileState.HIT_WATER;
-    }
-
-    private void setAsHitShip() {
-        tileState = TileState.HIT_SHIP;
     }
 
     ShootResult hit() {
@@ -48,8 +36,20 @@ class Tile {
         return ShootResult.TILE_INCORRECT;
     }
 
-    public void setAsPartOfShip(Ship ship) {
+    void setAsPartOfShip(Ship ship) {
         setAsShip();
         partOfShip = ship;
+    }
+
+    private void setAsShip() {
+        tileState = TileState.SHIP;
+    }
+
+    private void setAsHitWater() {
+        tileState = TileState.HIT_WATER;
+    }
+
+    private void setAsHitShip() {
+        tileState = TileState.HIT_SHIP;
     }
 }

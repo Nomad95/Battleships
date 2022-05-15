@@ -8,7 +8,7 @@ class Ship {
     private int shipHealthyTiles;
     private final List<Tile> shipTiles;
 
-    public Ship(int totalTileSize, List<Tile> shipTiles) {
+    Ship(int totalTileSize, List<Tile> shipTiles) {
         this.totalTileSize = totalTileSize;
         this.shipHealthyTiles = totalTileSize;
         this.shipTiles = shipTiles;

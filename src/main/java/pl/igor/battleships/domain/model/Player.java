@@ -15,7 +15,7 @@ public abstract class Player {
     @NonNull
     private final UUID id;
 
-    public Player(@NonNull String name) {
+    Player(@NonNull String name) {
         this.name = name;
         this.id = UUID.randomUUID();
     }
