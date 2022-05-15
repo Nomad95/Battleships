@@ -11,8 +11,6 @@ import pl.igor.battleships.domain.ShipsMapping;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toList;
-
 @RequiredArgsConstructor
 @Getter(value = AccessLevel.PACKAGE)
 public class Board {
@@ -20,9 +18,7 @@ public class Board {
     private final List<Ship> playerShips;
     private final Map<String, Tile> tiles;
     private final int gridSize;
-    private boolean readyToPlay = false;
     private boolean unsunkenShips = false;
-    private boolean inOngoingGame = false;
 
     Board(@NonNull UUID playerId, int size) {
         if (size < 2) {
@@ -58,28 +54,21 @@ public class Board {
 
     void populateWithShips(@NonNull ShipsMapping shipsMapping) {
         for (PlaceableShip shipToPlace : shipsMapping.getShipsMapping()) {
-            List<Tile> shipTiles = shipToPlace.getTileNumbers().stream()
+            Ship ship = new Ship(shipToPlace.getShipSize());
+            shipToPlace.getTileNumbers().stream()
                     .map(this::getTile)
                     .filter(Optional::isPresent)
                     .map(Optional::get)
-                    .collect(toList());
-            Ship ship = new Ship(shipToPlace.getShipSize(), shipTiles);
-            for (Tile shipTile : shipTiles) {
-                shipTile.setAsPartOfShip(ship);
-            }
+                    .forEach(tile -> tile.setAsPartOfShip(ship));
+
             playerShips.add(ship);
         }
 
-        setAsReady();
         checkLivingShips();
     }
 
     private void checkLivingShips() {
         unsunkenShips = playerShips.stream().anyMatch(ship -> !ship.isSunken());
-    }
-
-    private void setAsReady() {
-        readyToPlay = true;
     }
 
     ShootResult performShootAt(@NonNull String tileNumber) {
@@ -92,4 +81,5 @@ public class Board {
         checkLivingShips();
         return hitResult;
     }
+
 }
