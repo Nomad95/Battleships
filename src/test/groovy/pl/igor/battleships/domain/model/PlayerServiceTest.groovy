@@ -26,7 +26,7 @@ class PlayerServiceTest extends Specification {
 
     def "Should create computer player"() {
         when:
-            def player = playerService.createNewComputerPlayer("CPU1", new RandomFireComputerDifficulty())
+            def player = playerService.createNewComputerPlayer("CPU1")
         then:
             player.getPlayerType() == PlayerType.COMPUTER
             player.getName() == "CPU1"
@@ -41,16 +41,10 @@ class PlayerServiceTest extends Specification {
 
     def "Should throw when passed null computer name"() {
         when:
-            playerService.createNewComputerPlayer(null, new RandomFireComputerDifficulty())
+            playerService.createNewComputerPlayer(null)
         then:
             thrown(NullPointerException)
     }
 
-    def "Should throw when passed null computer difficulty"() {
-        when:
-            playerService.createNewComputerPlayer("CPU", null)
-        then:
-            thrown(NullPointerException)
-    }
 
 }

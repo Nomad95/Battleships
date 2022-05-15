@@ -2,10 +2,7 @@ package pl.igor.battleships.domain.ports;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import pl.igor.battleships.domain.model.ComputerDifficulty;
-import pl.igor.battleships.domain.model.ComputerPlayer;
 import pl.igor.battleships.domain.model.Player;
-import pl.igor.battleships.domain.model.StandardPlayer;
 import pl.igor.battleships.presentation.PlayerDto;
 import pl.igor.battleships.presentation.PlayerType;
 
@@ -15,7 +12,7 @@ public final class PlayerService {
     private final PlayerRepository playerRepository;
 
     public PlayerDto createNewPlayer(@NonNull String playerName) {
-        Player player = new StandardPlayer(playerName);
+        Player player = new Player(playerName, false);
         playerRepository.save(player);
         return PlayerDto.builder()
                 .id(player.getId())
@@ -24,8 +21,8 @@ public final class PlayerService {
                 .build();
     }
 
-    public PlayerDto createNewComputerPlayer(@NonNull String playerName, @NonNull ComputerDifficulty computerDifficulty) {
-        ComputerPlayer player = new ComputerPlayer(playerName, computerDifficulty);
+    public PlayerDto createNewComputerPlayer(@NonNull String playerName) {
+        Player player = new Player(playerName, true);
         playerRepository.save(player);
         return PlayerDto.builder()
                 .id(player.getId())

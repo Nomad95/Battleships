@@ -16,4 +16,8 @@ public class ShootResultDto {
     String message;
     boolean gameOver;
     UUID winner;
+
+    public boolean shouldRetry() {
+        return result.equals("ALREADY HIT") || result.equals("CAN'T HIT");
+    }
 }

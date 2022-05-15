@@ -5,7 +5,7 @@ import lombok.NonNull;
 
 import java.util.UUID;
 
-public abstract class Player {
+public class Player {
 
     @Getter
     @NonNull
@@ -15,11 +15,19 @@ public abstract class Player {
     @NonNull
     private final UUID id;
 
-    Player(@NonNull String name) {
+    @Getter
+    private final boolean computer;
+
+    public Player(@NonNull String name, boolean computer) {
         this.name = name;
+        this.computer = computer;
         this.id = UUID.randomUUID();
     }
 
-    abstract boolean isHuman();
-    abstract boolean isComputer();
+    public boolean isHuman() {
+        return !isComputer();
+    }
+    public boolean isComputer() {
+        return computer;
+    }
 }
