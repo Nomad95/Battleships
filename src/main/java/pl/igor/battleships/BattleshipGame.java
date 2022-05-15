@@ -22,14 +22,18 @@ public class BattleshipGame {
         BattleshipsFacade battleships = new BattleshipsFacade(playerService, battleshipsService);
 
         //create players and a game
-        PlayerDto lukasz = battleships.createHumanPlayer("Łukasz");
+        PlayerDto humanPlayer = battleships.createHumanPlayer("HumanPlayer1");
         //read difficulty
         PlayerDto r2D2 = battleships.createComputerPlayer("R2D2", Difficulty.EASY);
 
         StandardBattleshipsConfiguration config = new StandardBattleshipsConfiguration();
-        BattlefieldDto battleshipsGame = battleships.createGame(lukasz, r2D2, config);
+        BattlefieldDto battleshipsGame = battleships.createGame(humanPlayer, r2D2, config);
 
+        while (!battleshipsGame.isOver()) {
 
+        }
+
+        System.out.println("asd");
 
         //create players
         //generate battleships

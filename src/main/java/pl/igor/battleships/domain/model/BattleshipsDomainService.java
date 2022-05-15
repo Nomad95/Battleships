@@ -11,7 +11,7 @@ public class BattleshipsDomainService {
         return new Board(playerId, gridSize);
     }
 
-    public void placeShips(Board board, ShipsMapping shipsMapping) {
+    public void placeShips(@NonNull Board board, @NonNull ShipsMapping shipsMapping) {
         board.populateWithShips(shipsMapping);
     }
 }

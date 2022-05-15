@@ -24,12 +24,12 @@ public class Board {
     private boolean unsunkenShips = false;
     private boolean inOngoingGame = false;
 
-    Board(UUID playerId, int size) {
+    Board(@NonNull UUID playerId, int size) {
         if (size < 2) {
             throw new IllegalArgumentException("Grid size cannot be less than 2x2");
         }
 
-        if (size > 20) {
+        if (size > 30) {
             throw new IllegalArgumentException("Come on");
         }
 
@@ -52,49 +52,22 @@ public class Board {
         return grid;
     }
 
-    List<Tile> getTilesInProximity(@NonNull String tileNumber) {
-        Tile tile = getTile(tileNumber);
-        Set<String> adjacentTiles = Set.of(
-                tile.getTileNumberAtTopLeft(),
-                tile.getTileNumberAtTop(),
-                tile.getTileNumberAtTopRight(),
-                tile.getTileNumberAtRight(),
-                tile.getTileNumberAtLeft(),
-                tile.getTileNumberAtBottomLeft(),
-                tile.getTileNumberAtBottomRight(),
-                tile.getTileNumberAtBottom());
-
-        return adjacentTiles.stream()
-                .filter(this::tileExists)
-                .map(this::getTile)
-                .collect(toList());
+    Optional<Tile> getTile(@NonNull String tileNumber) {
+        return Optional.ofNullable(tiles.get(tileNumber));
     }
 
-    boolean tileExists(@NonNull String tileNumber) {
-        return tiles.containsKey(tileNumber);
-    }
-
-    Tile getTile(@NonNull String tileNumber) {
-        if (!tileExists(tileNumber)) {
-            throw new IllegalArgumentException("Wrong tileNumber provided to grid: " + tileNumber);
-        }
-
-        return tiles.get(tileNumber);
-    }
-
-    List<String> getSortedTilesNumbers() {
-        List<String> strings = new ArrayList<>(tiles.keySet());
-        Collections.sort(strings);
-        return strings;
-    }
-
-    void populateWithShips(ShipsMapping shipsMapping) {
+    void populateWithShips(@NonNull ShipsMapping shipsMapping) {
         for (PlaceableShip shipToPlace : shipsMapping.getShipsMapping()) {
             List<Tile> shipTiles = shipToPlace.getTileNumbers().stream()
                     .map(this::getTile)
-                    .peek(Tile::setAsShip)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
                     .collect(toList());
-            playerShips.add(new Ship(shipToPlace.getShipSize(), shipTiles));
+            Ship ship = new Ship(shipToPlace.getShipSize(), shipTiles);
+            for (Tile shipTile : shipTiles) {
+                shipTile.setAsPartOfShip(ship);
+            }
+            playerShips.add(ship);
         }
 
         setAsReady();
@@ -107,5 +80,16 @@ public class Board {
 
     private void setAsReady() {
         readyToPlay = true;
+    }
+
+    public ShootResult performShootAt(@NonNull String tileNumber) {
+        Optional<Tile> tileOptional = getTile(tileNumber);
+        if (tileOptional.isEmpty()) {
+            return ShootResult.WRONG_TILE;
+        }
+
+        ShootResult hitResult = tileOptional.get().hit();
+        checkLivingShips();
+        return hitResult;
     }
 }

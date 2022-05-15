@@ -9,14 +9,12 @@ import pl.igor.battleships.domain.model.StandardPlayer;
 import pl.igor.battleships.presentation.PlayerDto;
 import pl.igor.battleships.presentation.PlayerType;
 
-import java.util.UUID;
-
 @RequiredArgsConstructor
 public final class PlayerService {
 
     private final PlayerRepository playerRepository;
 
-    public PlayerDto createNewPlayer(String playerName) {
+    public PlayerDto createNewPlayer(@NonNull String playerName) {
         Player player = new StandardPlayer(playerName);
         playerRepository.save(player);
         return PlayerDto.builder()
@@ -26,7 +24,7 @@ public final class PlayerService {
                 .build();
     }
 
-    public PlayerDto createNewComputerPlayer(String playerName, ComputerDifficulty computerDifficulty) {
+    public PlayerDto createNewComputerPlayer(@NonNull String playerName, @NonNull ComputerDifficulty computerDifficulty) {
         ComputerPlayer player = new ComputerPlayer(playerName, computerDifficulty);
         playerRepository.save(player);
         return PlayerDto.builder()
@@ -36,7 +34,4 @@ public final class PlayerService {
                 .build();
     }
 
-    Player fetchPlayer(@NonNull UUID playerId) {
-        return playerRepository.getPlayer(playerId);
-    }
 }

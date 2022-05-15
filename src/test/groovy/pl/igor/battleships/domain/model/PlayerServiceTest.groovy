@@ -32,4 +32,25 @@ class PlayerServiceTest extends Specification {
             player.getName() == "CPU1"
     }
 
+    def "Should throw when passed null name"() {
+        when:
+            playerService.createNewPlayer(null)
+        then:
+            thrown(NullPointerException)
+    }
+
+    def "Should throw when passed null computer name"() {
+        when:
+            playerService.createNewComputerPlayer(null, new RandomFireComputerDifficulty())
+        then:
+            thrown(NullPointerException)
+    }
+
+    def "Should throw when passed null computer difficulty"() {
+        when:
+            playerService.createNewComputerPlayer("CPU", null)
+        then:
+            thrown(NullPointerException)
+    }
+
 }

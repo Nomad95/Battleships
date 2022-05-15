@@ -11,4 +11,5 @@ public class BattlefieldDto {
     UUID gameId;
     PlayerDto player1;
     PlayerDto player2;
+    boolean isOver;
 }
