@@ -6,5 +6,5 @@ public interface BattleshipsConfiguration {
 
     int getGridSize();
 
-    List<PlaceableShip2> newShipsPlacementMapping();
+    List<PlaceableShip> newShipsPlacementMapping();
 }

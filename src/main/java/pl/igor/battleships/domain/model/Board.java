@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import pl.igor.battleships.application.AsciiCommons;
-import pl.igor.battleships.application.game_configuration.PlaceableShip2;
+import pl.igor.battleships.application.game_configuration.PlaceableShip;
 import pl.igor.battleships.domain.ShipsMapping;
 
 import java.util.*;
@@ -89,7 +89,7 @@ public class Board {
     }
 
     void populateWithShips(ShipsMapping shipsMapping) {
-        for (PlaceableShip2 shipToPlace : shipsMapping.getShipsMapping()) {
+        for (PlaceableShip shipToPlace : shipsMapping.getShipsMapping()) {
             List<Tile> shipTiles = shipToPlace.getTileNumbers().stream()
                     .map(this::getTile)
                     .peek(Tile::setAsShip)

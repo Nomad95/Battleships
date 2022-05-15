@@ -1,7 +1,7 @@
 package pl.igor.battleships.domain.model;
 
 import pl.igor.battleships.application.game_configuration.BattleshipsConfiguration;
-import pl.igor.battleships.application.game_configuration.PlaceableShip2;
+import pl.igor.battleships.application.game_configuration.PlaceableShip;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class AllFieldsAsShipConfiguration implements BattleshipsConfiguration {
     }
 
     @Override
-    public List<PlaceableShip2> newShipsPlacementMapping() {
+    public List<PlaceableShip> newShipsPlacementMapping() {
         return null;
     }
 

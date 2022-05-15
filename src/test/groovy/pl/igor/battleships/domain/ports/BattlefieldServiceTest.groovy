@@ -1,6 +1,5 @@
 package pl.igor.battleships.domain.ports
 
-import pl.igor.battleships.application.game_configuration.PlaceableShip
 import pl.igor.battleships.domain.adapters.InMemoryBattlefieldRepository
 import pl.igor.battleships.domain.model.AllFieldsAsShipConfiguration
 import pl.igor.battleships.domain.model.BattleshipsDomainService
@@ -35,10 +34,6 @@ class BattlefieldServiceTest extends Specification {
             battlefield.gameId != null
             battlefield.player1.id == player1.id
             battlefield.player2.id == player2.id
-    }
-
-    private List<PlaceableShip> twoShipsWith3And4Tiles() {
-        List.of(new PlaceableShip(4), new PlaceableShip(3))
     }
 
     private PlayerDto aPlayerOne() {

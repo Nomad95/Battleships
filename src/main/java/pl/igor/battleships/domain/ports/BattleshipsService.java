@@ -2,7 +2,7 @@ package pl.igor.battleships.domain.ports;
 
 import lombok.RequiredArgsConstructor;
 import pl.igor.battleships.application.game_configuration.BattleshipsConfiguration;
-import pl.igor.battleships.application.game_configuration.PlaceableShip2;
+import pl.igor.battleships.application.game_configuration.PlaceableShip;
 import pl.igor.battleships.domain.ShipsMapping;
 import pl.igor.battleships.domain.model.Battlefield;
 import pl.igor.battleships.domain.model.BattleshipsDomainService;
@@ -20,12 +20,12 @@ public final class BattleshipsService {
 
     public BattlefieldDto createNewGame(PlayerDto player1, PlayerDto player2, BattleshipsConfiguration battleshipsConfiguration) {
         Board playerOneBoard = battleshipsDomainService.createBoard(player1.getId(), battleshipsConfiguration.getGridSize());
-        List<PlaceableShip2> shipsToPlace = battleshipsConfiguration.newShipsPlacementMapping();
+        List<PlaceableShip> shipsToPlace = battleshipsConfiguration.newShipsPlacementMapping();
         ShipsMapping playerOneShipsMapping = new ShipsMapping(shipsToPlace);
         battleshipsDomainService.placeShips(playerOneBoard, playerOneShipsMapping);
 
         Board playerTwoBoard = battleshipsDomainService.createBoard(player2.getId(), battleshipsConfiguration.getGridSize());
-        List<PlaceableShip2> shipsToPlace2 = battleshipsConfiguration.newShipsPlacementMapping();
+        List<PlaceableShip> shipsToPlace2 = battleshipsConfiguration.newShipsPlacementMapping();
         ShipsMapping playerTwoShipsMapping = new ShipsMapping(shipsToPlace2);
         battleshipsDomainService.placeShips(playerTwoBoard, playerTwoShipsMapping);
 
