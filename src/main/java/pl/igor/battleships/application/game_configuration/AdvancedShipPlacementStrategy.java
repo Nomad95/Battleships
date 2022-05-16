@@ -1,8 +1,7 @@
 package pl.igor.battleships.application.game_configuration;
 
 import lombok.RequiredArgsConstructor;
-import pl.igor.battleships.application.AsciiCommons;
-import pl.igor.battleships.application.GridTraverser;
+import pl.igor.battleships.application.GridHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,19 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequiredArgsConstructor
 public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
 
-    private final GridTraverser gridTraverser;
+    private static final int PLACEMENT_ERRORS_THRESHOLD = 4;
+    private static final int DEAD_END_THRESHOLD = 3;
+    private final GridHelper gridHelper;
 
     @Override
     public List<PlaceableShip> getShips(int boardSize, List<ShipConfig> shipConfigs) {
-        List<String> availableTiles = new ArrayList<>();
-
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                String tileNumber = String.format("%s%s", AsciiCommons.I.arrayIndexToLetter(i), j + 1);
-                System.out.println(tileNumber);
-                availableTiles.add(tileNumber);
-            }
-        }
+        List<String> availableTiles = gridHelper.getAllGridTileNames(boardSize);
 
         ArrayList<PlaceableShip> placeableShips = new ArrayList<>();
         for (ShipConfig shipConfig : shipConfigs) {
@@ -49,7 +42,7 @@ public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
 
                 String randomStartingShipPlace = getRandomTile(availableTiles);
 
-                GridTraverser.GridCoordinates startingTile = gridTraverser.numberToCoordinates(randomStartingShipPlace);
+                GridHelper.GridCoordinates startingTile = gridHelper.numberToCoordinates(randomStartingShipPlace);
 
                 shipTileNumbers.add(startingTile.toTileNumber());
                 availableTiles.remove(startingTile.toTileNumber());
@@ -60,26 +53,28 @@ public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
                 int placementErrors = 0;
                 int deadEnds = 0;
 
-                GridTraverser.GridCoordinates currentTile = startingTile;
+                GridHelper.GridCoordinates currentTile = startingTile;
 
-                while (shipTilesToPlace > 0) {
-                    if (placementErrors == 4) {
-                        System.out.println("whoopsie cant place ship further! trying again from start tile");
-                        currentTile = startingTile;//dead end try again from starting tile
-                        //new direction from start tile
-                        deadEnds++;
-                        placementErrors = 0;
-                    }
-
-                    if (deadEnds == 3) {
+                while (isShipInConstruction(shipTilesToPlace)) {
+                    if (couldNotFitShipHere(deadEnds)) {
                         System.out.println("whoopsie i cant place this ship here! trying again from a new start tile!");
                         //new direction from start tile start again from diffrent start tile
-                        shipProgressionDirection = shipProgressionDirection.nextPlacementDirection();
                         availableTiles.addAll(shipTileNumbers);//rollback
                         break;
                     }
 
-                    GridTraverser.GridCoordinates nextTile = getNextTile(currentTile, shipProgressionDirection);
+                    if (couldNotPlaceShipInThisDirection(placementErrors)) {
+                        System.out.println("whoopsie cant place ship further! trying again from start tile and different location");
+                        availableTiles.addAll(shipTileNumbers);//rollback
+                        availableTiles.remove(startingTile.toTileNumber());
+                        //new direction from start tile
+                        shipProgressionDirection = shipProgressionDirection.nextPlacementDirection();
+                        deadEnds++;
+                        placementErrors = 0;
+                        currentTile = startingTile;//dead end try again from starting tile
+                    }
+
+                    GridHelper.GridCoordinates nextTile = getNextTile(currentTile, shipProgressionDirection);
                     if (!availableTiles.contains(nextTile.toTileNumber())) { //no need to check if is outside the grid
                         placementErrors++;
                         continue;
@@ -91,7 +86,7 @@ public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
                     currentTile = nextTile;
                 }
 
-                if (deadEnds == 3) {
+                if (couldNotFitShipHere(deadEnds)) {
                     System.out.println("Starting again");
                     botchedPlacementThreshold--;
                     continue;
@@ -118,7 +113,7 @@ public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
         throw new IllegalStateException("Could not get random placement direction");
     }
 
-    private GridTraverser.GridCoordinates getNextTile(GridTraverser.GridCoordinates tile, PlacementDirection direction) {
+    private GridHelper.GridCoordinates getNextTile(GridHelper.GridCoordinates tile, PlacementDirection direction) {
         switch (direction) {
             case LEFT: return tile.moveLeft();
             case UP: return tile.moveUp();
@@ -147,6 +142,18 @@ public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
 
             throw new IllegalStateException("Cant pick up next direction");
         }
+    }
+
+    private boolean couldNotFitShipHere(int deadEnds) {
+        return deadEnds == DEAD_END_THRESHOLD;
+    }
+
+    private boolean couldNotPlaceShipInThisDirection(int placementErrors) {
+        return placementErrors == 1;
+    }
+
+    private boolean isShipInConstruction(int shipTilesToPlace) {
+        return shipTilesToPlace > 0;
     }
 
 }

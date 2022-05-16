@@ -1,22 +1,19 @@
 package pl.igor.battleships.application.game_configuration
 
 import org.apache.commons.collections4.CollectionUtils
-import pl.igor.battleships.application.GridTraverser
-import pl.igor.battleships.application.game_configuration.AdvancedShipPlacementStrategy
-import pl.igor.battleships.application.game_configuration.PlaceableShip
-import pl.igor.battleships.application.game_configuration.ShipConfig
+import pl.igor.battleships.application.GridHelper
 import spock.lang.Specification
 
 import java.util.stream.Collectors
 
 class AdvancedShipPlacementTest extends Specification {
 
-    GridTraverser traverser
+    GridHelper traverser
     AdvancedShipPlacementStrategy placementStrategy
 
     def setup() {
-        placementStrategy = new AdvancedShipPlacementStrategy(new GridTraverser())
-        traverser = new GridTraverser()
+        placementStrategy = new AdvancedShipPlacementStrategy(new GridHelper())
+        traverser = new GridHelper()
     }
 
     def "should place ships apart from each other of at least one tile"() {
@@ -25,6 +22,18 @@ class AdvancedShipPlacementTest extends Specification {
                     new ShipConfig("large", 5, 1),
                     new ShipConfig("small", 3, 1),
                     new ShipConfig("medium", 4, 1))
+
+        when:
+            def ships = placementStrategy.getShips(10, shipDefinitions)
+
+        then:
+            isValid(ships)
+    }
+
+    def "should place a lot of ships correctly if its possible"() {
+        given:
+            def shipDefinitions = List.of(
+                    new ShipConfig("large", 5, 15))
 
         when:
             def ships = placementStrategy.getShips(10, shipDefinitions)

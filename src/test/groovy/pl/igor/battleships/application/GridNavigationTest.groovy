@@ -5,10 +5,10 @@ import spock.lang.Specification
 
 class GridNavigationTest extends Specification {
 
-    GridTraverser traverser
+    GridHelper traverser
 
     def setup() {
-        this.traverser = new GridTraverser()
+        this.traverser = new GridHelper()
     }
 
     def "should point to left tile number"() {

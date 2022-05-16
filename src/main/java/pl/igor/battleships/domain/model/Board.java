@@ -40,7 +40,6 @@ public class Board {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 String tileNumber = String.format("%s%s", AsciiCommons.I.arrayIndexToLetter(i), j + 1);
-                System.out.println(tileNumber);
                 grid.put(tileNumber, new Tile(tileNumber));
             }
         }

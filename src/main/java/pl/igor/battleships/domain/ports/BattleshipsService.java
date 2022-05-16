@@ -49,16 +49,14 @@ public final class BattleshipsService {
     public ShootResultDto shootAt(@NonNull UUID gameId, @NonNull UUID shootingPlayerId, @NonNull String tileNumber) {
         Optional<Battlefield> battlefieldOptional = Optional.ofNullable(battlefieldRepository.getBattlefield(gameId));
         if (battlefieldOptional.isEmpty()) {
-            return ShootResultDto.builder().result("CAN'T HIT").message("THIS GAME IS NOT AVAILABLE").build();
+            return getShootResultDtoBuilder(ShootResult.GAME_CANT_BE_FOUND).build();
         }
         Battlefield battlefield = battlefieldOptional.get();
         ShootResult shootResult = battlefield.performAttackBy(shootingPlayerId, tileNumber);
 
         battlefieldRepository.save(battlefield);
 
-        ShootResultDto.ShootResultDtoBuilder resultBuilder = ShootResultDto.builder()
-                .result(shootResult.getShootResult())
-                .message(shootResult.getMessage());
+        ShootResultDto.ShootResultDtoBuilder resultBuilder = getShootResultDtoBuilder(shootResult);
 
         boolean isGameOver = battlefield.isOver();
 
@@ -67,5 +65,12 @@ public final class BattleshipsService {
         }
 
         return resultBuilder.build();
+    }
+
+    private ShootResultDto.ShootResultDtoBuilder getShootResultDtoBuilder(ShootResult gameCantBeFound) {
+        return ShootResultDto.builder()
+                .result(gameCantBeFound.getShootResult())
+                .message(gameCantBeFound.getMessage())
+                .shouldRetry(gameCantBeFound.shouldRetry());
     }
 }
