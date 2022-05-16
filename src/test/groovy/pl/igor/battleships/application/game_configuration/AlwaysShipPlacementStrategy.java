@@ -1,9 +1,6 @@
-package pl.igor.battleships.domain.model;
+package pl.igor.battleships.application.game_configuration;
 
 import pl.igor.battleships.application.AsciiCommons;
-import pl.igor.battleships.application.game_configuration.PlaceableShip;
-import pl.igor.battleships.application.game_configuration.ShipConfig;
-import pl.igor.battleships.application.game_configuration.ShipPlacementStrategy;
 
 import java.util.HashSet;
 import java.util.List;

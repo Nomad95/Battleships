@@ -20,7 +20,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public final class BattleshipsService {
 
-
     private final BattleshipsDomainService battleshipsDomainService;
     private final BattlefieldRepository battlefieldRepository;
 

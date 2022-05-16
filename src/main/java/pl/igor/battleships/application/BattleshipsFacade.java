@@ -10,12 +10,6 @@ import pl.igor.battleships.presentation.ShootResultDto;
 
 import java.util.UUID;
 
-//0 = {PlaceableShip@1063} "PlaceableShip(shipSize=4, tileNumbers=[D4, G4, F4, E4])"
-//1 = {PlaceableShip@1064} "PlaceableShip(shipSize=4, tileNumbers=[I1, H1, G1, J1])"
-//2 = {PlaceableShip@1065} "PlaceableShip(shipSize=5, tileNumbers=[I2, I3, I4, I5, I6])"
-
-
-
 @RequiredArgsConstructor
 public class BattleshipsFacade {
 

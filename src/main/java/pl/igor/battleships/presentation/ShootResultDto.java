@@ -18,12 +18,7 @@ public class ShootResultDto {
     UUID winner;
     boolean shouldRetry;
 
-
     public boolean shouldRetry() {
         return shouldRetry;
     }
-
-    //2 = {PlaceableShip@1065} "PlaceableShip(shipSize=5, tileNumbers=[B4, B5, B6, B7, B8])"
-    //1 = {PlaceableShip@1064} "PlaceableShip(shipSize=4, tileNumbers=[D4, C4, F4, E4])"
-    //0 = {PlaceableShip@1063} "PlaceableShip(shipSize=4, tileNumbers=[I9, H9, G9, J9])"
 }

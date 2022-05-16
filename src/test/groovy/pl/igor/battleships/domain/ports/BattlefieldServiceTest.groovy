@@ -1,11 +1,11 @@
 package pl.igor.battleships.domain.ports
 
+import pl.igor.battleships.application.game_configuration.AlwaysShipPlacementStrategy
+import pl.igor.battleships.application.game_configuration.NeverShipPlacementStrategy
 import pl.igor.battleships.application.game_configuration.StandardBattleshipsConfiguration
+import pl.igor.battleships.application.game_configuration.TestShipsConfiguration
 import pl.igor.battleships.domain.adapters.InMemoryBattlefieldRepository
-import pl.igor.battleships.domain.model.AlwaysShipPlacementStrategy
 import pl.igor.battleships.domain.model.BattleshipsDomainService
-import pl.igor.battleships.domain.model.NeverShipPlacementStrategy
-import pl.igor.battleships.domain.model.TestShipsConfiguration
 import pl.igor.battleships.presentation.PlayerDto
 import spock.lang.Narrative
 import spock.lang.Specification

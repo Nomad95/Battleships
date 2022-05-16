@@ -15,7 +15,6 @@ public class Player {
     @NonNull
     private final UUID id;
 
-    @Getter
     private final boolean computer;
 
     public Player(@NonNull String name, boolean computer) {
@@ -27,6 +26,7 @@ public class Player {
     public boolean isHuman() {
         return !isComputer();
     }
+
     public boolean isComputer() {
         return computer;
     }

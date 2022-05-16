@@ -4,9 +4,6 @@ import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GridHelper {
 
@@ -55,19 +52,5 @@ public class GridHelper {
             return String.format("%s%s", AsciiCommons.I.arrayIndexToLetter(x), y);
         }
 
-        public Set<String> getVicinityTileNumbers() {
-            GridCoordinates left = moveLeft();
-            GridCoordinates leftTop = left.moveUp();
-            GridCoordinates top = leftTop.moveRight();
-            GridCoordinates rightTop = top.moveRight();
-            GridCoordinates right = rightTop.moveDown();
-            GridCoordinates rightBottom = right.moveDown();
-            GridCoordinates bottom = rightBottom.moveLeft();
-            GridCoordinates leftBottom = bottom.moveLeft();
-
-            return Stream.of(left, leftTop, top, rightTop, right, rightBottom, bottom, leftBottom)
-                    .map(GridCoordinates::toTileNumber)
-                    .collect(Collectors.toSet());
-        }
     }
 }

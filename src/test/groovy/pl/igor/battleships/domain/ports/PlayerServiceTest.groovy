@@ -1,4 +1,4 @@
-package pl.igor.battleships.domain.model
+package pl.igor.battleships.domain.ports
 
 import pl.igor.battleships.domain.adapters.InMemoryPlayerRepository
 import pl.igor.battleships.domain.ports.PlayerRepository

@@ -12,6 +12,8 @@ class Ship {
     }
 
     void takeAHit() {
-        shipHealthyTiles--;
+        if (shipHealthyTiles != 0) {
+            shipHealthyTiles--;
+        }
     }
 }

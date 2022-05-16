@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'groovy'
     id "io.freefair.lombok" version "6.4.3"
-    //id 'io.freefair.lombok' version '3.8.4'
 }
 
 group 'pl.igor'
@@ -20,13 +19,6 @@ repositories {
 }
 
 dependencies {
-
-    //lombok
-//    compileOnly 'org.projectlombok:lombok:1.18.24'
-//    annotationProcessor 'org.projectlombok:lombok:1.18.24'
-//
-//    testCompileOnly 'org.projectlombok:lombok:1.18.24'
-//    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     //spock
     implementation 'org.codehaus.groovy:groovy-all:2.5.8'

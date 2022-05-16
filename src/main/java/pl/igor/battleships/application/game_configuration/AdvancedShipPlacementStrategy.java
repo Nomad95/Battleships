@@ -12,14 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequiredArgsConstructor
 public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
 
-    private static final int PLACEMENT_ERRORS_THRESHOLD = 4;
+    private static final int PLACEMENT_ERRORS_THRESHOLD = 1;
     private static final int DEAD_END_THRESHOLD = 3;
     private final GridHelper gridHelper;
 
     @Override
     public List<PlaceableShip> getShips(int boardSize, List<ShipConfig> shipConfigs) {
         List<String> availableTiles = gridHelper.getAllGridTileNames(boardSize);
-
         ArrayList<PlaceableShip> placeableShips = new ArrayList<>();
         for (ShipConfig shipConfig : shipConfigs) {
             System.out.printf("placing %s %s ships of size %s%n", shipConfig.getNumberOfShips(), shipConfig.getShipType(), shipConfig.getShipSize());
@@ -28,7 +27,6 @@ public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
             int botchedPlacementThreshold = availableTiles.size();
 
             while (shipsToPlace > 0) {
-
                 if (botchedPlacementThreshold == 0) {
                     throw new IllegalArgumentException("There is no possibility to place all ships");
                 }
@@ -149,7 +147,7 @@ public class AdvancedShipPlacementStrategy implements ShipPlacementStrategy {
     }
 
     private boolean couldNotPlaceShipInThisDirection(int placementErrors) {
-        return placementErrors == 1;
+        return placementErrors == PLACEMENT_ERRORS_THRESHOLD;
     }
 
     private boolean isShipInConstruction(int shipTilesToPlace) {
